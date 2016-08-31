@@ -10,6 +10,4 @@ Discord Bot
 
 ```cd ~/Aigis```
 
-then
-
 ```aigis```
