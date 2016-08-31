@@ -1,2 +1,2 @@
 # Aigis
-# Aigis
+Discord.gg Bot
