@@ -3,23 +3,22 @@ var env = require('dotenv').config();
 var token = process.env.DISCORD_TOKEN;
 var email = process.env.EMAIL;
 var password = process.env.PASSWORD;
-var client = new Discord.Client();
+var bot = new Discord.Client();
 
-client.loginWithToken(token, output);
+bot.login(email, password).then(success).catch(err);
 
-function output(error, token) {
-  if (error) {
-    console.log('There was an error logging in: ' + error);
-    return;
-  } else {
-      console.log('Logged in. Token: ' + token);
-  }
+function success() {
+    console.dir('Logged in')
 }
 
-client.on('message', function(message) {
+function err(error) {
+    console.dir(error)
+}
+
+bot.on('message', function(message) {
   if (message.channel.isPrivate) {
-    console.log('(Private) ${message.author.name}: ${message.content}');
+    console.dir('Private Message ' + 'from' + ' ' + message.author.name + ' : ' + message.content)
   } else {
-      console.log('(${message.server.name} / ${message.channel.name}) ${message.author.name}: ${message.content}');
+    console.dir('Message ' + 'in' + ' ' + message.channel.name + ' from ' + message.author.name + ' : ' + message.content)
   }
 });
