@@ -1,0 +1,31 @@
+- google search
+- urbandictionary 
+- pastebin
+- weather/flight info
+- hentai quote
+- dice/coin flip/randomizer
+- jerkcity random quotes
+- airhorn
+- word filtering
+- mod chat command features: /kick /ban etc, server management
+- user timeout
+- strawpoll generator 
+- youtube video/music play in voice channel (music queue, pause, volume etc, voteskip)
+- ^soundcloud	
+- randomly print a specified string at random or fixed interval 
+- *booru image search
+- keyword triggers
+- twitch emotes
+- jokes/insults/memes
+- 9ball
+- figlet using code/fixed width text
+- lotteries/votes
+- basic maths/calculator
+- translate
+- reminders
+- package tracking
+- TTS voice channel join/leaving
+- irc gateway/relay, control or use bot text functions in irc as well
+- ascii artfarts
+- bitcoin price fluctuations
+- games (hangman, typing race, trivia etc)
