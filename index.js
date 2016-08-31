@@ -1,4 +1,6 @@
-var Discord = require("discord.js");
+#!/usr/bin/env node --harmony
+
+var Discord = require('discord.js');
 var env = require('dotenv').config();
 var token = process.env.DISCORD_TOKEN;
 var email = process.env.EMAIL;
