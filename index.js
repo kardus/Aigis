@@ -5,7 +5,7 @@ const chalk = require('chalk');
 var env = require('dotenv').config();
 var Nightmare = require('nightmare'),
   vo = require('vo'),
-  nightmare = Nightmare({show: true, openDevTools: true});
+  nightmare = Nightmare({show: true, openDevTools: false});
 var token = process.env.DISCORD_TOKEN;
 var email = process.env.EMAIL;
 var password = process.env.PASSWORD;
@@ -39,17 +39,17 @@ bot.on('message', function(message) {
 
 var google = function*(searchParam) {
   var search = yield nightmare
+    .viewport(1280, 720)
+    .useragent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36')
     .goto('https://www.google.com/')
-    .type('form[action=*"/search"] [name=f]', searchParam)
-    //switch this to an actual element
-    .wait(5000)
-    //wtf where is google hiding this?
-    .click('div#sblsbb')
-    .evaluate(function(){
-      Array.from(document.querySelectorAll('h3.r'))
-        .map((element) => element.href)
-    }).then(function(result) {
-      console.log(result)
-    });
+    .insert('form[action=*"/search"] [name=f]', searchParam)
+    .wait(10000)
+    .mousedown('div.sbibod')
+    .wait(10000)
+    .type('document', '\u000d')
+    // .evaluate(function(){
+    //   Array.from(document.querySelectorAll('h3.r'))
+    //     .map((element) => element.href)
+    // })
   return search
 }
