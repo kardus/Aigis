@@ -52,9 +52,10 @@ var google = function*(searchParam, message) {
     }).then(function(result) {
         return result
     })
-    urls.pop();
-    urls.push(result[0]);
-    console.log(urls);
-    bot.reply(message, urls);
+    var link1 = result.slice(0, 1);
+    var link2 = result.slice(0, 2);
+    var link3 = result.slice(0, 3);
+    var links = [link1 + "\n" + link2 + "\n" + link3];
+    bot.reply(message, links);
     yield nightmare.end();
 }
