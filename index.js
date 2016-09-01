@@ -31,7 +31,6 @@ bot.on('message', function(message) {
 });
 
 bot.on('message', function(message) {
-  var urls = [];
   var content = message.content;
   var selector = content.substr(8);
   var channel = message.channel.name;
