@@ -40,6 +40,7 @@ bot.on('message', function(message) {
 });
 
 var google = function*(searchParam, message) {
+  var links = []
   var result = yield nightmare
     .viewport(1280, 720)
     .useragent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36')
@@ -56,5 +57,15 @@ var google = function*(searchParam, message) {
     var link3 = result.slice(0, 3);
     var links = [link1 + "\n" + link2 + "\n" + link3];
     bot.reply(message, links);
-    yield nightmare.end();
 }
+
+Nightmare.action('clearCache',
+  function(name, options, parent, win, renderer, done) {
+    parent.respondTo('clearCache', function(done) {
+      win.webContents.session.clearCache(done);
+    });
+    done();
+  },
+  function(message, done) {
+    this.child.call('clearCache', done);
+  });

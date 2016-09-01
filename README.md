@@ -1,5 +1,5 @@
 # Aigis
-
+---
 Discord Bot
 
 ##### Install
@@ -16,3 +16,9 @@ create a new application [here](http://https://discordapp.com/developers/applica
 `cp .env.example .env`
 
 replace email and password inside .env with your creds.
+
+##### Available Methods  
+---
+| name  | description  |
+| ----- | ------------ |   
+| `!google "word"` | returns top 3 google results for given word |
