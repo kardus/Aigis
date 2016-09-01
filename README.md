@@ -4,8 +4,7 @@ Discord Bot
 
 ##### Install
 
-`npm install -g`
-`npm link`
+`npm install -g && npm link`
 
 ##### Run
 
