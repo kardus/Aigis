@@ -5,7 +5,7 @@ const chalk = require('chalk');
 var env = require('dotenv').config();
 var Nightmare = require('nightmare'),
   vo = require('vo'),
-  nightmare = Nightmare({show: true, openDevTools: false});
+  nightmare = Nightmare({show: true, openDevTools: true, dock: true});
 var token = process.env.DISCORD_TOKEN;
 var email = process.env.EMAIL;
 var password = process.env.PASSWORD;
@@ -34,22 +34,25 @@ bot.on('message', function(message) {
   var selector = content.substr(8)
   if (content.startsWith('!google')) {
     vo(google)(selector)
+      .then(result => console.log(result))
   }
 });
 
 var google = function*(searchParam) {
-  var search = yield nightmare
+  var result = yield nightmare
     .viewport(1280, 720)
     .useragent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36')
     .goto('https://www.google.com/')
-    .insert('form[action=*"/search"] [name=f]', searchParam)
-    .wait(10000)
-    .mousedown('div.sbibod')
-    .wait(10000)
-    .type('document', '\u000d')
-    // .evaluate(function(){
-    //   Array.from(document.querySelectorAll('h3.r'))
-    //     .map((element) => element.href)
-    // })
-  return search
+    .type('form[action=*"/search"] [name=f]', searchParam + '\u000d')
+    .wait('div#rcnt')
+    .extract('div.mw div#rcnt h3.r a')
+    .end()
+  return result
 }
+
+Nightmare.action('extract', function(selector){
+  this.evaluate_now((selector) => {
+    return document.querySelector(selector)
+        .href;
+  }, selector)
+})
