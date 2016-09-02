@@ -10,8 +10,6 @@ var token = process.env.DISCORD_TOKEN;
 var email = process.env.EMAIL;
 var password = process.env.PASSWORD;
 var bot = new Discord.Client();
-var dank_maymays = [];
-var urls = [];
 
 bot.login(email, password).then(success).catch(err);
 
@@ -34,7 +32,6 @@ bot.on('message', function(message) {
 bot.on('message', function(message) {
   var content = message.content;
   var selector = content.substr(8);
-  var channel = message.channel.name;
   if (content.startsWith('!google')) {
     vo(google)(selector, message)
   }
@@ -53,12 +50,10 @@ var google = function*(searchParam, message) {
     }).then(function(result) {
         return result
     })
-    // var link1 = result.slice(0, 1);
-    // var link2 = result.slice(0, 2);
-    // var link3 = result.slice(0, 3);
-    // var links = [link1 + "\n" + link2 + "\n" + link3];
     var link = result[0];
     bot.reply(message, link);
+    yield nightmare.clearCache()
+    yield nightmare.end()
 }
 
 Nightmare.action('clearCache',
