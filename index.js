@@ -3,6 +3,7 @@
 var Discord = require('discord.js');
 const chalk = require('chalk');
 var env = require('dotenv').config();
+var request = require('request')
 var Nightmare = require('nightmare'),
   vo = require('vo'),
   nightmare = Nightmare({show: false, openDevTools: false, dock: false});
@@ -35,6 +36,20 @@ bot.on('message', function(message) {
   if (content.startsWith('!google')) {
     vo(google)(selector, message)
   }
+});
+
+bot.on('message', function(message) {
+  var content = message.content;
+  var selector = content.substr(7);
+  if (content.startsWith('!obama')) {
+    request.post({url:'http://talkobamato.me/synthesize.py', formData: {input_text: selector}}, function optionalCallback(err, response, body) {
+      if (err) {
+        return console.error('Failed', err);
+      }
+      console.log('Video Located At:', response.headers.location);
+      bot.reply(message, response.headers.location)
+      });
+    };
 });
 
 var google = function*(searchParam, message) {
