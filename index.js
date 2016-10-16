@@ -40,6 +40,11 @@ bot.on('message', function(message) {
 
 bot.on('message', function(message) {
   var content = message.content;
+  console.log(content);
+});
+
+bot.on('message', function(message) {
+  var content = message.content;
   var selector = content.substr(7);
   if (content.startsWith('!obama')) {
     request.post({url:'http://talkobamato.me/synthesize.py', formData: {input_text: selector}}, function optionalCallback(err, response, body) {
